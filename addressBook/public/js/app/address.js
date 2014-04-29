@@ -6,6 +6,7 @@ define(['app/util', 'jquery'], function(util, $) {
         this.data = data;
     };
 
+    // Address.getList()
     Address.getList = function() {
         $.ajax({url: 'address'}).done(function(data) {
 
@@ -27,6 +28,8 @@ define(['app/util', 'jquery'], function(util, $) {
         });
     };
 
+    //var myAddress = new Address();
+    //myAddress.delete();
     Address.prototype.delete = function() {
         $.ajax({
             url: 'address/id/' + this.id,
@@ -56,5 +59,23 @@ define(['app/util', 'jquery'], function(util, $) {
         });
     };
 
+    Address.prototype.isValid = function() {
+        var errors = [];
+        for (var i in this.data) {
+            if (this.data.hasOwnProperty(i)) {
+                if (this.data[i] === '') {
+                    errors.push(i);
+                }
+            }
+        }
+        if (errors.length === 0) {
+            return true;
+        }
+        return errors;
+    }
+
     return Address;
 });
+
+
+

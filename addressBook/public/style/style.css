@@ -1,3 +1,6 @@
 #form {
     display: none;
 }
+.error {
+    display: none;
+}

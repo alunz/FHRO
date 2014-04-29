@@ -40,7 +40,17 @@ require(['app/address', 'app/util', 'jquery'], function(Address, util, $) {
 
             var address = new Address(id, data);
 
-            address.save();
+            var valid = address.isValid();
+            $('.error').css('display', 'none');
+            if (valid === true) {
+                address.save();
+            } else {
+                for (var i = 0; i < valid.length; i++) {
+                    $('#err' + valid[i]).css('display', 'block');
+                }
+            }
+
+
         });
     });
 })

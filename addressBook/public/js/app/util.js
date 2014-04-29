@@ -3,6 +3,7 @@ define(['jquery'], function($) {
         toggleVisibility: function(table, newButton, form) {
             var addrTbl = table.css('display');
             if (addrTbl === 'block') {
+                $('.error').css('display', 'none');
                 table.css('display', 'none');
                 newButton.css('display', 'none');
                 form.css('display', 'block');
@@ -14,7 +15,7 @@ define(['jquery'], function($) {
         },
         clearForm: function() {
             $('#id').val('');
-            $('#gender').val('');
+            $('#gender').val('female');
             $('#firstname').val('');
             $('#lastname').val('');
             $('#street').val('');

@@ -40,30 +40,55 @@
                 <td>Gender:</td>
                 <td>
                     <select id="gender">
-                        <option>male</option>
                         <option>female</option>
+                        <option>male</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>Firstname:</td>
-                <td><input type="text" id="firstname"></td>
+                <td>
+                    <input type="text" id="firstname">
+                    <div id="errfirstname" class="error">
+                        Firstname is empty
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>Lastname:</td>
-                <td><input type="text" id="lastname"></td>
+                <td>
+                    <input type="text" id="lastname">
+                    <div id="errlastname" class="error">
+                        Lastname is empty
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>Street:</td>
-                <td><input type="text" id="street"></td>
+                <td>
+                    <input type="text" id="street">
+                    <div id="errstreet" class="error">
+                        Street is empty
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>Postcode:</td>
-                <td><input type="text" id="postcode"></td>
+                <td>
+                    <input type="text" id="postcode">
+                    <div id="errpostcode" class="error">
+                        Postcode is empty
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>Place:</td>
-                <td><input type="text" id="place"></td>
+                <td>
+                    <input type="text" id="place">
+                    <div id="errplace" class="error">
+                        Place is empty
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td colspan="2"><button id="btnSave">Save</button></td>
@@ -72,6 +97,5 @@
         </table>
     </div>
     <button id="btnNew">Neue Adresse</button>
-
 </body>
 </html>
