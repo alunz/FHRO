@@ -1,20 +1,13 @@
 {
-  "name": "addressBook",
-  "main": "index.js",
-  "version": "0.0.0",
-  "authors": [
-    "Sebastian Springer <sebastian.springer@mayflower.de>"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "jquery": "~2.1.0",
-    "requirejs": "~2.1.11"
-  }
+    "name": "addressBook",
+    "main": "index.js",
+    "version": "0.0.0",
+    "authors": [
+        "Sebastian Springer <sebastian.springer@mayflower.de>"
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "backbone": "~1.1.2",
+        "jquery": "~2.1.1"
+    }
 }
