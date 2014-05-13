@@ -22,6 +22,22 @@ module.exports = function(grunt) {
                         rename: function(dest, src) {
                             return dest + '/' + src.replace('.min', '');
                         }
+                    },{
+                        expand: true,
+                        src: 'bower_components/requirejs/require.js',
+                        dest: 'public/js/lib',
+                        flatten: true,
+                        rename: function(dest, src) {
+                            return dest + '/' + src.replace('.min', '');
+                        }
+                    },{
+                        expand: true,
+                        src: 'bower_components/text/text.js',
+                        dest: 'public/js/app',
+                        flatten: true,
+                        rename: function(dest, src) {
+                            return dest + '/' + src.replace('.min', '');
+                        }
                     }
                 ]
             }

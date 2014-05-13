@@ -1,51 +1,42 @@
-var AddressCollectionView = Backbone.View.extend({
+define(['backbone', 'addressView', 'text!addressCollection.tpl', 'app'], function(Backbone, AddressView, template, app) {
+    var AddressCollectionView = Backbone.View.extend({
 
-    tagName: 'div',
+        tagName: 'div',
 
-    className: 'addressTable',
+        className: 'addressTable',
 
-    events: {
-        'click .btnNew': 'createAddress'
-    },
+        events: {
+            'click .btnNew': 'createAddress'
+        },
 
-    template: '<table><thead>' +
-        '<tr>' +
-        '<td>Gender</td>' +
-        '<td>Firstname</td>' +
-        '<td>Lastname</td>' +
-        '<td>Street</td>' +
-        '<td>Postcode</td>' +
-        '<td>Place</td>' +
-        '<td>Edit</td>' +
-        '<td>Delete</td>' +
-        '</tr>' +
-        '</thead><tbody></tbody></table><button class="btnNew">Neu</button>',
+        template: template,
 
-    initialize: function() {
-        this.listenTo(this.model, "add", this.render);
-        this.listenTo(this.model, "add", this.bindViews);
+        initialize: function() {
+            this.listenTo(this.model, "add", this.render);
+            this.listenTo(this.model, "add", this.bindViews);
+            this.listenTo(this.model, "destroy", this.bindViews)
+        },
 
-        this.listenTo(this.model, "destroy", this.bindViews)
-    },
+        bindViews: function(model, collection) {
+            $('.addressTable tbody').empty();
+            collection.each(function(item) {
+                var addressView = new AddressView({model: item});
+                addressView.render();
+            });
+        },
 
-    bindViews: function(model, collection) {
-        $('.addressTable tbody').empty();
-        collection.each(function(item) {
-            var addressView = new AddressView({model: item});
-            addressView.render();
-        });
-    },
+        render: function() {
+            $('.addressForm').remove();
+            $('.addressTable').remove();
 
-    render: function() {
-        $('.addressForm').remove();
-        $('.addressTable').remove();
+            $('body').append(this.$el.html(this.template));
+            this.delegateEvents();
+        },
 
-        $('body').append(this.$el.html(this.template));
-        this.delegateEvents();
-    },
+        createAddress: function() {
+            app.router.navigate('/new', {trigger: true});
+        }
 
-    createAddress: function() {
-        router.navigate('/new', {trigger: true});
-    }
-
+    });
+    return AddressCollectionView;
 });
