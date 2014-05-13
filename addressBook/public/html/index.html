@@ -5,9 +5,80 @@
     <title></title>
 
     <script src="js/lib/angular.js"></script>
+    <script src="js/app/app.js"></script>
 
 </head>
-<body>
+<body ng-app="addressBook">
+
+
+    Suche: <input type="text" ng-model="search.firstname">
+
+    <div ng-controller="addressBookCtrl">
+        <table>
+            <thead>
+                <tr>
+                    <th>Gender</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Street</th>
+                    <th>Postcode</th>
+                    <th>Place</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="address in addresses | filter : search">
+                    <td>{{ address.gender }}</td>
+                    <td>{{ address.firstname }}</td>
+                    <td>{{ address.lastname }}</td>
+                    <td>{{ address.street }}</td>
+                    <td>{{ address.postcode }}</td>
+                    <td>{{ address.place }}</td>
+                    <td><button ng-click="edit(address.id)">Edit</button></td>
+                    <td><button ng-click="delete(address.id)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div ng-hide="displayForm">
+            <button ng-click="new()">New</button>
+        </div>
+
+        <div ng-show="displayForm">
+            <div>
+                <label>Gender</label>
+                <select ng-model="address.gender">
+                    <option value="female">female</option>
+                    <option value="male">male</option>
+                </select>
+            </div>
+            <div>
+                <label>Firstname</label>
+                <input type="text" ng-model="address.firstname">
+            </div>
+            <div>
+                <label>Lastname</label>
+                <input type="text" ng-model="address.lastname">
+            </div>
+            <div>
+                <label>Street</label>
+                <input type="text" ng-model="address.street">
+            </div>
+            <div>
+                <label>Postcode</label>
+                <input type="text" ng-model="address.postcode">
+            </div>
+            <div>
+                <label>Place</label>
+                <input type="text" ng-model="address.place">
+            </div>
+            <div>
+                <button ng-click="save()">Save</button>
+                <button ng-click="hideForm()">Cancel</button>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
