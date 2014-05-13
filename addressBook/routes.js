@@ -9,6 +9,12 @@ module.exports = function (app) {
         });
     });
 
+    app.get('/address/:id', function(req, res) {
+        addressModel.get(req.params.id).then(function(address) {
+            res.send(JSON.stringify(address));
+        });
+    });
+
     app.post('/address', function(req, res) {
         var addressData = {
             gender: req.body.gender,
