@@ -18,27 +18,17 @@ addressBook.controller('addressBookCtrl', ['$scope', '$http', function($scope, $
 
     $scope.edit = function(id) {
         $http.get('/address/' + id).success(function(data) {
-            $scope.address.id = id;
-            $scope.address.gender = data.gender;
-            $scope.address.firstname = data.firstname;
-            $scope.address.lastname = data.lastname;
-            $scope.address.street = data.street;
-            $scope.address.postcode = data.postcode;
-            $scope.address.place = data.place;
+            $scope.address = data;
         });
         $scope.showForm();
     };
 
     $scope.new = function() {
-        $scope.address = {
-            id: '',
-            gender: '',
-            firstname: '',
-            lastname: '',
-            street: '',
-            postcode: '',
-            place: ''
-        };
+        for (var i in $scope.address) {
+            if ($scope.address.hasOwnProperty(i)) {
+                $scope.address[i] = '';
+            }
+        }
         $scope.showForm();
     };
 
@@ -63,19 +53,10 @@ addressBook.controller('addressBookCtrl', ['$scope', '$http', function($scope, $
     };
 
     $scope.save = function () {
-        var address = $scope.address;
-        var data = {
-            gender: address.gender,
-            firstname: address.firstname,
-            lastname: address.lastname,
-            street: address.street,
-            postcode: address.postcode,
-            place: address.place
-        };
-        if (address.id) {
-            $http.put('/address/' + address.id, data).success($scope.fetch);
+        if ($scope.address.id) {
+            $http.put('/address/' + $scope.address.id, $scope.address).success($scope.fetch);
         } else {
-            $http.post('/address', data).success($scope.fetch);
+            $http.post('/address', $scope.address).success($scope.fetch);
         }
     };
 
