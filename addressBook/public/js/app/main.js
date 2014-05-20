@@ -5,6 +5,7 @@ require.config({
         'text': '../lib/text',
         'ngTrans': '../lib/angular-translate',
         'ngRouter': '../lib/angular-ui-router',
+        'ngResource': '../lib/angular-resource',
         'modal': '../lib/modal'
     },
     shim: {
@@ -18,6 +19,9 @@ require.config({
             deps: ['angular']
         },
         'modal': {
+            deps: ['angular']
+        },
+        'ngResource': {
             deps: ['angular']
         }
     },

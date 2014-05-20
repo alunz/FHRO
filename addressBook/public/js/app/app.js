@@ -1,52 +1,15 @@
-define(
-    ['angular', 'ngTrans', 'ngRouter', 'modal', 'translations/de', 'translations/en', 'text!../../list.html', 'text!../../form.html'],
-    function(angular, ngTrans, ngRouter, modal, de, en, tplList, tplForm) {
-    var addressBook = angular.module('addressBook', ['pascalprecht.translate', 'ui.router']);
+define(['angular', 'routes', 'translation', 'address'], function(angular) {
+    var addressBook = angular.module('addressBook', ['addressBook.translation', 'addressBook.routes', 'addressBook.address']);
 
-    addressBook.config(['$translateProvider', function ($translateProvider) {
-        $translateProvider.translations('de', de);
-        $translateProvider.translations('en', en);
-        $translateProvider.preferredLanguage('en');
+    addressBook.controller('listCtrl', ['$scope', 'address', function($scope, address) {
+        $scope.addresses = address.getAll();
     }]);
 
-    addressBook.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/list');
-        $stateProvider.state('list', {
-            url: '/list',
-            template: tplList,
-            controller: 'listCtrl'
-        });
-
-        $stateProvider.state('delete', {
-            url: '/delete/:id',
-            controller: 'deleteCtrl'
-        });
-
-        $stateProvider.state('edit', {
-            url: '/edit/:id',
-            template: tplForm,
-            controller: 'formCtrl'
-        });
+    addressBook.controller('deleteCtrl', ['$scope', '$stateParams', '$state', 'address', function($scope, $stateParams, $state, address) {
+        address.delete({id: $stateParams.id}).$promise.then($state.go.bind($state, 'list'));
     }]);
 
-    addressBook.controller('translateCtrl', ['$scope', '$translate', function($scope, $translate) {
-        $scope.translate = function(lang) {
-            $translate.use(lang);
-        };
-    }]);
-
-    addressBook.controller('listCtrl', ['$scope', '$http', function($scope, $http) {
-        $scope.addresses = [];
-        $http.get('/address').success(function (data) {
-            $scope.addresses = data;
-        });
-    }]);
-
-    addressBook.controller('deleteCtrl', ['$scope', '$http', '$stateParams', '$state', function($scope, $http, $stateParams, $state) {
-        $http.delete('/address/' + $stateParams.id).success($state.go.bind($state, 'list'));
-    }]);
-
-    addressBook.controller('formCtrl', ['$scope', '$http', '$stateParams', '$state', function($scope, $http, $stateParams, $state) {
+    addressBook.controller('formCtrl', ['$scope', '$stateParams', '$state', 'address', function($scope, $stateParams, $state, address) {
         $scope.address = {
             id: '',
             gender: '',
@@ -58,16 +21,14 @@ define(
         };
 
         if($stateParams.id) {
-            $http.get('/address/' + $stateParams.id).success(function(data) {
-                $scope.address = data;
-            });
+            $scope.address = address.read({id: $stateParams.id});
         }
 
         $scope.save = function () {
             if ($scope.address.id) {
-                $http.put('/address/' + $scope.address.id, $scope.address).success($state.go.bind($state, 'list'));
+                address.update($scope.address).$promise.then($state.go.bind($state, 'list'));
             } else {
-                $http.post('/address', $scope.address).success($state.go.bind($state, 'list'));
+                address.create($scope.address).$promise.then($state.go.bind($state, 'list'));
             }
         };
 

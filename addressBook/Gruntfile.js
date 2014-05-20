@@ -39,6 +39,11 @@ module.exports = function(grunt) {
                         src: 'bower_components/angular-ui-bootstrap/src/modal/modal.js',
                         dest: 'public/js/lib',
                         flatten: true
+                    }, {
+                        expand: true,
+                        src: 'bower_components/angular-resource/angular-resource.js',
+                        dest: 'public/js/lib',
+                        flatten: true
                     }
 
                 ]
