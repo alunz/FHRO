@@ -8,80 +8,12 @@
 
 </head>
 <body>
-
-
-    <div ng-controller="addressBookCtrl">
-        <div>
-            <button ng-click="translate('de')">DE</button>
-            <button ng-click="translate('en')">EN</button>
-        </div>
-
-        Suche: <input type="text" ng-model="search.firstname">
-        <table>
-            <thead>
-                <tr>
-                    <th>{{ 'GENDER' | translate }}</th>
-                    <th>{{ 'FIRSTNAME' | translate }}</th>
-                    <th>{{ 'LASTNAME' | translate }}</th>
-                    <th>{{ 'STREET' | translate }}</th>
-                    <th>{{ 'POSTCODE' | translate }}</th>
-                    <th>{{ 'PLACE' | translate }}</th>
-                    <th>{{ 'EDIT' | translate }}</th>
-                    <th>{{ 'DELETE' | translate }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="address in addresses | filter : search">
-                    <td>{{ address.gender | translate }}</td>
-                    <td>{{ address.firstname }}</td>
-                    <td>{{ address.lastname }}</td>
-                    <td>{{ address.street }}</td>
-                    <td>{{ address.postcode }}</td>
-                    <td>{{ address.place }}</td>
-                    <td><button ng-click="edit(address.id)">{{ 'EDIT' | translate }}</button></td>
-                    <td><button ng-click="delete(address.id)">{{ 'DELETE' | translate }}</button></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div ng-hide="displayForm">
-            <button ng-click="new()">{{ 'NEW' | translate }}</button>
-        </div>
-
-        <div ng-show="displayForm">
-            <div>
-                <label>{{ 'GENDER' | translate }}</label>
-                <select ng-model="address.gender">
-                    <option value="female">{{ 'female' | translate }}</option>
-                    <option value="male">{{ 'male' | translate }}</option>
-                </select>
-            </div>
-            <div>
-                <label>{{ 'FIRSTNAME' | translate }}</label>
-                <input type="text" ng-model="address.firstname">
-            </div>
-            <div>
-                <label>{{ 'LASTNAME' | translate }}</label>
-                <input type="text" ng-model="address.lastname">
-            </div>
-            <div>
-                <label>{{ 'STREET' | translate }}</label>
-                <input type="text" ng-model="address.street">
-            </div>
-            <div>
-                <label>{{ 'POSTCODE' | translate }}</label>
-                <input type="text" ng-model="address.postcode">
-            </div>
-            <div>
-                <label>{{ 'PLACE' | translate }}</label>
-                <input type="text" ng-model="address.place">
-            </div>
-            <div>
-                <button ng-click="save()">{{ 'SAVE' | translate }}</button>
-                <button ng-click="hideForm()">{{ 'CANCEL' | translate }}</button>
-            </div>
-        </div>
+    <div ng-controller="translateCtrl">
+        <button ng-click="translate('de')">DE</button>
+        <button ng-click="translate('en')">EN</button>
     </div>
+
+    <div ui-view></div>
 
 </body>
 </html>
