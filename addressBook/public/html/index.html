@@ -4,78 +4,81 @@
     <meta charset="UTF-8">
     <title></title>
 
-    <script src="js/lib/angular.js"></script>
-    <script src="js/app/app.js"></script>
+    <script src="js/lib/require.js" data-main="js/app/main"></script>
 
 </head>
-<body ng-app="addressBook">
+<body>
 
-
-    Suche: <input type="text" ng-model="search.firstname">
 
     <div ng-controller="addressBookCtrl">
+        <div>
+            <button ng-click="translate('de')">DE</button>
+            <button ng-click="translate('en')">EN</button>
+        </div>
+
+        Suche: <input type="text" ng-model="search.firstname">
         <table>
             <thead>
                 <tr>
-                    <th>Gender</th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Street</th>
-                    <th>Postcode</th>
-                    <th>Place</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>{{ 'GENDER' | translate }}</th>
+                    <th>{{ 'FIRSTNAME' | translate }}</th>
+                    <th>{{ 'LASTNAME' | translate }}</th>
+                    <th>{{ 'STREET' | translate }}</th>
+                    <th>{{ 'POSTCODE' | translate }}</th>
+                    <th>{{ 'PLACE' | translate }}</th>
+                    <th>{{ 'EDIT' | translate }}</th>
+                    <th>{{ 'DELETE' | translate }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="address in addresses | filter : search">
-                    <td>{{ address.gender }}</td>
+                    <td>{{ address.gender | translate }}</td>
                     <td>{{ address.firstname }}</td>
                     <td>{{ address.lastname }}</td>
                     <td>{{ address.street }}</td>
                     <td>{{ address.postcode }}</td>
                     <td>{{ address.place }}</td>
-                    <td><button ng-click="edit(address.id)">Edit</button></td>
-                    <td><button ng-click="delete(address.id)">Delete</button></td>
+                    <td><button ng-click="edit(address.id)">{{ 'EDIT' | translate }}</button></td>
+                    <td><button ng-click="delete(address.id)">{{ 'DELETE' | translate }}</button></td>
                 </tr>
             </tbody>
         </table>
 
         <div ng-hide="displayForm">
-            <button ng-click="new()">New</button>
+            <button ng-click="new()">{{ 'NEW' | translate }}</button>
         </div>
 
         <div ng-show="displayForm">
             <div>
-                <label>Gender</label>
+                <label>{{ 'GENDER' | translate }}</label>
                 <select ng-model="address.gender">
-                    <option value="female">female</option>
-                    <option value="male">male</option>
+                    <option value="female">{{ 'female' | translate }}</option>
+                    <option value="male">{{ 'male' | translate }}</option>
                 </select>
             </div>
             <div>
-                <label>Firstname</label>
+                <label>{{ 'FIRSTNAME' | translate }}</label>
                 <input type="text" ng-model="address.firstname">
             </div>
             <div>
-                <label>Lastname</label>
+                <label>{{ 'LASTNAME' | translate }}</label>
                 <input type="text" ng-model="address.lastname">
             </div>
             <div>
-                <label>Street</label>
+                <label>{{ 'STREET' | translate }}</label>
                 <input type="text" ng-model="address.street">
             </div>
             <div>
-                <label>Postcode</label>
+                <label>{{ 'POSTCODE' | translate }}</label>
                 <input type="text" ng-model="address.postcode">
             </div>
             <div>
-                <label>Place</label>
+                <label>{{ 'PLACE' | translate }}</label>
                 <input type="text" ng-model="address.place">
             </div>
             <div>
-                <button ng-click="save()">Save</button>
-                <button ng-click="hideForm()">Cancel</button>
+                <button ng-click="save()">{{ 'SAVE' | translate }}</button>
+                <button ng-click="hideForm()">{{ 'CANCEL' | translate }}</button>
             </div>
         </div>
     </div>
