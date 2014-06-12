@@ -1,0 +1,33 @@
+<div>
+    <div>
+        <label>{{ 'GENDER' | translate }}</label>
+        <select ng-model="address.gender">
+            <option value="female">{{ 'female' | translate }}</option>
+            <option value="male">{{ 'male' | translate }}</option>
+        </select>
+    </div>
+    <div>
+        <label>{{ 'FIRSTNAME' | translate }}</label>
+        <input type="text" ng-model="address.firstname">
+    </div>
+    <div>
+        <label>{{ 'LASTNAME' | translate }}</label>
+        <input type="text" ng-model="address.lastname">
+    </div>
+    <div>
+        <label>{{ 'STREET' | translate }}</label>
+        <input type="text" ng-model="address.street">
+    </div>
+    <div>
+        <label>{{ 'POSTCODE' | translate }}</label>
+        <input type="text" ng-model="address.postcode">
+    </div>
+    <div>
+        <label>{{ 'PLACE' | translate }}</label>
+        <input type="text" ng-model="address.place">
+    </div>
+    <div>
+        <button ng-click="save()">{{ 'SAVE' | translate }}</button>
+        <button ui-sref="list">{{ 'CANCEL' | translate }}</button>
+    </div>
+</div>
