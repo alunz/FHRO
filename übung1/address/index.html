@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../lib/jquery.js"></script>
+    <script src="index.js"></script>
+
+</head>
+<body>
+
+    <div id="form" style="display: none;">
+        <form onsubmit="return false;">
+            <input type="hidden" id="id"/>
+            <div>
+                <label for="salutation">Anrede:</label>
+                <input type="text" id="salutation">
+            </div>
+            <div>
+                <label for="firstname">Vorname:</label>
+                <input type="text" id="firstname"/>
+            </div>
+            <div>
+                <label for="lastname">Nachname:</label>
+                <input type="text" id="lastname"/>
+            </div>
+            <div>
+                <label for="street">Straße:</label>
+                <input type="text" id="street"/>
+            </div>
+            <div>
+                <label for="postcode">PLZ:</label>
+                <input type="text" id="postcode"/>
+            </div>
+            <div>
+                <label for="place">Ort:</label>
+                <input type="text" id="place"/>
+            </div>
+            <div>
+                <label for="country">Land:</label>
+                <input type="text" id="country"/>
+            </div>
+
+            <button id="save">speichern</button>
+        </form>
+
+    </div>
+
+    <button id="new">Neue Adresse</button>
+
+    <div id="list">
+        <div id="emptyList">Keine Einträge vorhanden</div>
+    </div>
+
+</body>
+</html>
